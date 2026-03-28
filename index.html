@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SWISBOT — St. Willibrord AI Hub</title>
+  <meta name="description" content="12 AI assistants, 1 school — built by St. Willibrord students to help every corner of your community.">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <div>
+      <h1>St. Willibrord High School</h1>
+      <p>SWIS BOT Hub</p>
+    </div>
+  </nav>
+
+  <section class="hero">
+    <h2>Meet Your AI Assistants</h2>
+    <p>12 specialized bots built by St. Willibrord students to help your school community</p>
+  </section>
+
+  <section class="grid-wrap">
+    <div class="bot-grid" id="botGrid"></div>
+  </section>
+
+  <footer class="footer">
+    <p>Built by St. Willibrord Students 🚀</p>
+  </footer>
+
+  <script>
+    fetch('bots.json')
+      .then(r => r.json())
+      .then(bots => {
+        const grid = document.getElementById('botGrid');
+        bots.forEach(bot => {
+          const card = document.createElement('a');
+          card.href = `bot-${bot.id}/index.html`;
+          card.className = 'bot-card';
+          card.innerHTML = `
+            <div class="accent-strip"></div>
+            <div class="card-body">
+              <span class="badge">Bot ${bot.id}</span>
+              <h3>${bot.name}</h3>
+              <p class="specialty">${bot.specialty}</p>
+              <p class="tagline">${bot.tagline}</p>
+              <button class="btn-chat">Chat Now</button>
+            </div>
+          `;
+          grid.appendChild(card);
+        });
+      });
+  </script>
+</body>
+</html>
